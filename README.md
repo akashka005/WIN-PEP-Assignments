@@ -166,3 +166,46 @@ class StudentSerializer(serializers.ModelSerializer):
 DEMO:
 
 ![alt text](image-5.png)
+
+# ASSIGNMENT TASK-5 #
+
+## EMAIL ##
+
+1. core/forms.py
+
+from django import forms
+from .models import RegisteredUser
+
+class RegistrationForm(forms.ModelForm):
+    class Meta:
+        model = RegisteredUser
+        fields = ['name', 'email']
+
+2. core/models.py
+
+from django.db import models
+
+class RegisteredUser(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email
+
+3. Settings.py
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = "***************"
+EMAIL_HOST_PASSWORD = "***************"
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+DEMO:
+
+![alt text](image-6.png)
+![alt text](image-7.png)
+![alt text](image-8.png)
